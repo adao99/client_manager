@@ -40,30 +40,21 @@ export default async function Layout(props: { children: React.ReactNode }) {
 
   const hasSession = !!session?.user.id;
 
-  const headersList = headers();
-  const pathname = headersList.get("x-request-path");
-  console.log("headers", headersList);
-
-  if (!hasSession && pathname !== "/login") {
-    console.log("redirecting to login");
-    return redirect("/login");
-  } else {
-    return (
-      <html lang="en">
-        <body
-          className={[
-            "bg-base-100 text-base-content",
-            "font-sans",
-            fontSans.variable,
-          ].join(" ")}
-        >
-          {/* {hasSession && <NavBar session={session} />} */}
-          <TRPCReactProvider headers={headers()}>
-            {!hasSession && props.children}
-            {hasSession && <Drawer session={session}>{props.children}</Drawer>}
-          </TRPCReactProvider>
-        </body>
-      </html>
-    );
-  }
+  return (
+    <html lang="en">
+      <body
+        className={[
+          "bg-base-100 text-base-content",
+          "font-sans",
+          fontSans.variable,
+        ].join(" ")}
+      >
+        {/* {hasSession && <NavBar session={session} />} */}
+        <TRPCReactProvider headers={headers()}>
+          {!hasSession && props.children}
+          {hasSession && <Drawer session={session}>{props.children}</Drawer>}
+        </TRPCReactProvider>
+      </body>
+    </html>
+  );
 }
