@@ -40,7 +40,7 @@ export const {
       //update user profile image if it has changed
       const discordProfile = params.profile as DiscordProfile;
 
-      if (params.user.image !== discordProfile.image_url) {
+      if (params.user?.image !== discordProfile.image_url) {
         console.log("updating user image");
         await db
           .update(users)
