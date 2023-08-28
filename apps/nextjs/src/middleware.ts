@@ -8,6 +8,9 @@ export function middleware(request: NextRequest) {
   }
 
   //add current path as a custom header
+
+  console.log("cookies", request.cookies);
+
   const authCookie = request.cookies.get("next-auth.session-token");
   const pathName = request.nextUrl.pathname;
 
