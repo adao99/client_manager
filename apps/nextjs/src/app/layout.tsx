@@ -42,7 +42,11 @@ export default async function Layout(props: { children: React.ReactNode }) {
 
   const headersList = headers();
   const pathname = headersList.get("x-invoke-path");
+  console.log("current path", pathname);
+  console.log("hasSession", hasSession);
+  console.log("session", session);
   if (!hasSession && pathname !== "/login") {
+    console.log("redirecting to login");
     return redirect("/login");
   } else {
     return (
