@@ -9,7 +9,10 @@ export function middleware(request: NextRequest) {
 
   if (!authCookie && pathName !== "/login") {
     console.log("redirecting to login");
-    return NextResponse.redirect("/login");
+
+    //redirect to login page using absolute path
+    const redirectUrl = new URL("/login", request.nextUrl.origin);
+    return NextResponse.redirect(redirectUrl);
   }
 
   return NextResponse.next();
