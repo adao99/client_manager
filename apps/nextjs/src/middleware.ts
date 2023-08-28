@@ -3,6 +3,10 @@ import type { NextRequest } from "next/server";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
+  if (request.nextUrl.pathname.startsWith("/api/auth")) {
+    return NextResponse.next();
+  }
+
   //add current path as a custom header
   const authCookie = request.cookies.get("next-auth.session-token");
   const pathName = request.nextUrl.pathname;
