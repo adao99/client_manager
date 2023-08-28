@@ -28,6 +28,7 @@ export const {
   CSRF_experimental,
 } = NextAuth({
   adapter: DrizzleAdapter(db, tableCreator),
+  useSecureCookies: env.NODE_ENV === "production",
   providers: [
     Discord({
       clientId: env.DISCORD_CLIENT_ID,
@@ -51,7 +52,6 @@ export const {
 
       return true;
     },
-
     session: async ({ session, user }) => {
       return {
         ...session,
