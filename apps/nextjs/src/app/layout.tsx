@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 
 import { auth } from "@acme/auth";
 
+import Drawer from "~/components/drawer.";
 import { NavBar } from "~/components/navbar";
 import { TRPCReactProvider } from "./providers";
 
@@ -53,9 +54,10 @@ export default async function Layout(props: { children: React.ReactNode }) {
             fontSans.variable,
           ].join(" ")}
         >
-          {hasSession && <NavBar session={session} />}
+          {/* {hasSession && <NavBar session={session} />} */}
           <TRPCReactProvider headers={headers()}>
-            {props.children}
+            {!hasSession && props.children}
+            {hasSession && <Drawer session={session}>{props.children}</Drawer>}
           </TRPCReactProvider>
         </body>
       </html>
