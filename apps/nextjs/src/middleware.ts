@@ -11,8 +11,12 @@ export function middleware(request: NextRequest) {
 
   console.log("cookies", request.cookies);
 
-  const authCookie = request.cookies.get("next-auth.session-token");
+  const authCookie =
+    request.cookies.get("next-auth.session-token") ||
+    request.cookies.get("__Secure-next-auth.session-token");
   const pathName = request.nextUrl.pathname;
+
+  console.log("authCookie", authCookie);
 
   if (!authCookie && pathName !== "/login") {
     console.log("redirecting to login");
